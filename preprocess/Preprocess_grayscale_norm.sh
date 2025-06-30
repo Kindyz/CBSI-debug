@@ -2,8 +2,8 @@
 which fslmaths
 which ImageMath
 
-dataset_dir="./MICCAI_2023/BraTS-Africa/95_Glioma"
-output_base="./MICCAI_2023/BraTS-Africa/95_Glioma_harmonization"
+dataset_dir="./Glioma_DATA/RAW_DATA/Train"
+output_base="./Glioma_DATA/Preprocessing_DATA/Train"
 
 
 dir_list=$(ls -l "$dataset_dir" | awk '/^d/ {print $NF}')
@@ -25,30 +25,30 @@ do
     fi
 
     # Find files (compatible with .nii and .nii.gz)
-    seg=$(find ${input_dir} -name "${subject}-seg.nii" -o -name "${subject}-seg.nii.gz" | head -n 1)
-    flair=$(find ${input_dir} -name "${subject}-t2f.nii" -o -name "${subject}-t2f.nii.gz" | head -n 1)
+    ROI=$(find ${input_dir} -name "${subject}-ROI.nii" -o -name "${subject}-ROI.nii.gz" | head -n 1)
+    flair=$(find ${input_dir} -name "${subject}-T2F.nii" -o -name "${subject}-T2F.nii.gz" | head -n 1)
     t1c=$(find ${input_dir} -name "${subject}-t1c.nii" -o -name "${subject}-t1c.nii.gz" | head -n 1)
-    t1=$(find ${input_dir} -name "${subject}-t1n.nii" -o -name "${subject}-t1n.nii.gz" | head -n 1)
+    t1=$(find ${input_dir} -name "${subject}-T1.nii" -o -name "${subject}-T1.nii.gz" | head -n 1)
 
     # Check if the original file exists
-    if [ -z "$seg" ]; then
-        echo "File not found: ${subject}-seg.nii or ${subject}-seg.nii.gz"
+    if [ -z "$ROI" ]; then
+        echo "File not found: ${subject}-ROI.nii or ${subject}-ROI.nii.gz"
         exit 1
     fi
     if [ -z "$flair" ]; then
-        echo "File not found: ${subject}-t2f.nii or ${subject}-t2f.nii.gz"
+        echo "File not found: ${subject}-T2F.nii or ${subject}-T2F.nii.gz"
         exit 1
     fi
     if [ -z "$t1c" ]; then
-        echo "File not found: ${subject}-t1c.nii or ${subject}-t1c.nii.gz"
+        echo "File not found: ${subject}-T1C.nii or ${subject}-T1C.nii.gz"
         exit 1
     fi
     if [ -z "$t1" ]; then
-        echo "File not found: ${subject}-t1n.nii or ${subject}-t1n.nii.gz"
+        echo "File not found: ${subject}-T1.nii or ${subject}-T1.nii.gz"
         exit 1
     fi
 
-    cp "$seg" "$output_dir/ROI.nii.gz"  # Copy the seg file to a new path and rename it ROI.nii.gz
+    cp "$ROI" "$output_dir/ROI.nii.gz"  # Copy the seg file to a new path and rename it ROI.nii.gz
 
 
     # Start processing Flair
