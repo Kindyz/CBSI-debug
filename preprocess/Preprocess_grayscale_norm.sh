@@ -2,10 +2,16 @@
 which fslmaths
 which ImageMath
 
-dataset_dir="./Glioma_DATA/RAW_DATA/Train"
-output_base="./Glioma_DATA/Preprocessing_DATA/Train"
+# 获取当前工作目录（修正变量赋值）
+root="$(pwd)"
+echo "Current working directory: $root"
 
+# 设置路径（使用完整绝对路径）
+dataset_dir="$root/Glioma_DATA/RAW_DATA/Train/ET-0"
+output_base="$root/Glioma_DATA/Preprocessing_DATA/Train/ET-0"
 
+echo "Input base directory: $dataset_dir"
+echo "Output base directory: $output_base"
 dir_list=$(ls -l "$dataset_dir" | awk '/^d/ {print $NF}')
 
 for subject in $dir_list
@@ -17,6 +23,10 @@ do
     output_dir="$output_base/$subject"
     mkdir -p "$output_dir"
     cd "$output_dir"
+    # 在脚本中添加调试信息
+    echo "Checking input_dir: ${input_dir}"
+    ls -l "${input_dir}"  # 确认目录内容
+
 
     # Check if the target path already exists
     if [ -f "$output_dir/T2F.nii.gz" ] && [ -f "$output_dir/T1C.nii.gz" ] && [ -f "$output_dir/T1.nii.gz" ] && [ -f "$output_dir/ROI.nii.gz" ]; then
@@ -25,26 +35,26 @@ do
     fi
 
     # Find files (compatible with .nii and .nii.gz)
-    ROI=$(find ${input_dir} -name "${subject}-ROI.nii" -o -name "${subject}-ROI.nii.gz" | head -n 1)
-    flair=$(find ${input_dir} -name "${subject}-T2F.nii" -o -name "${subject}-T2F.nii.gz" | head -n 1)
-    t1c=$(find ${input_dir} -name "${subject}-t1c.nii" -o -name "${subject}-t1c.nii.gz" | head -n 1)
-    t1=$(find ${input_dir} -name "${subject}-T1.nii" -o -name "${subject}-T1.nii.gz" | head -n 1)
+    ROI=$(find ${input_dir} -name "ROI.nii" -o -name "ROI.nii.gz" | head -n 1)
+    flair=$(find ${input_dir} -name "T2F.nii" -o -name "T2F.nii.gz" | head -n 1)
+    t1c=$(find ${input_dir} -name "T1C.nii" -o -name "T1C.nii.gz" | head -n 1)
+    t1=$(find ${input_dir} -name "T1.nii" -o -name "T1.nii.gz" | head -n 1)
 
     # Check if the original file exists
     if [ -z "$ROI" ]; then
-        echo "File not found: ${subject}-ROI.nii or ${subject}-ROI.nii.gz"
+        echo "File not found: seg.nii or ROI.nii.gz"
         exit 1
     fi
     if [ -z "$flair" ]; then
-        echo "File not found: ${subject}-T2F.nii or ${subject}-T2F.nii.gz"
+        echo "File not found: t2f.nii or T2F.nii.gz"
         exit 1
     fi
     if [ -z "$t1c" ]; then
-        echo "File not found: ${subject}-T1C.nii or ${subject}-T1C.nii.gz"
+        echo "File not found: T1Gd.nii or t1c.nii.gz or T1C.nii.gz"
         exit 1
     fi
     if [ -z "$t1" ]; then
-        echo "File not found: ${subject}-T1.nii or ${subject}-T1.nii.gz"
+        echo "File not found: t1.nii or T1.nii.gz"
         exit 1
     fi
 
