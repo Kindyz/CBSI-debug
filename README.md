@@ -34,7 +34,7 @@ pip install -r requirements.txt
 # Prepare Dataset
 To simpify the dataloading for your own dataset, we provide a default dataset that simply requires the path to the folder with your NifTI images inside, i.e.
 ```
-Train/                               Test/                        # Path to the folder that contains the images
+./Glioma_DATA/RAW_DATA/Train         ./Glioma_DATA/RAW_DATA/Test/                        # Path to the folder that contains the images
 ├── ET-1 	# ET label               ├── PA_001                   # ID is not important and can be randomly generated to ensure anonymity
     ├── ID_001                               ├── T1.nii.gz        # The sequence of the NifTI (strictly consistent)
             ├── T1C.nii.gz                   ├── T2F.nii.gz       
