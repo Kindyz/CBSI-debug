@@ -1,10 +1,10 @@
 # Welcome to CBSI!
-**Contrast-free BBB Status Identification model (CBSI)** is a generative diffusion AI that can identify BBB status with high accuracy using non-contrast MR images including T1 and T2-FLAIR MR scans.
+**Contrast-free BBB Status Identification model (CBSI)** is a generative diffusion AI that can identify BBB status with high accuracy using non-contrast MR images, including T1 and T2-FLAIR MR scans.
 
 <img src="https://github.com/SMU-MedicalVision/CBSI-master/blob/main/sample_images/Framework.png" width="800px">
 
 
-This repository contains the code to our paper "Contrast-free identification of glioma blood-brain barrier status via generative diffusion AI and non-contrast MRI".
+This repository contains the code of our paper "Contrast-free identification of glioma blood-brain barrier status via generative diffusion AI and non-contrast MRI".
 
 
 
@@ -26,13 +26,13 @@ and activate it with
 ```
 conda activate CBSI_env
 ```
-Subsequently, download and install the required libraries by running
+Subsequently, download and install the required libraries by running:
 ```
 pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
 pip install -r requirements.txt
 ```
-# Prepare Dataset
-To simpify the dataloading for your own dataset, we provide a default dataset that simply requires the path to the folder with your NifTI images inside, i.e.
+# Prepare the Dataset
+To simplify the dataloading for your own dataset, we provide a default dataset that simply requires the path to the folder with your NifTI images inside, i.e.
 ```
 ./Glioma_DATA/RAW_DATA/Train         ./Glioma_DATA/RAW_DATA/Test/                        # Path to the folder that contains the images
 ├── ET-1 	# ET label             ├── PA_001                   # ID is not important and can be randomly generated to ensure anonymity
@@ -54,7 +54,7 @@ To simpify the dataloading for your own dataset, we provide a default dataset th
 ```
 If needed, you may consider downloading the glioma public dataset from [BraTS 2023 Challenge](https://www.synapse.org/Synapse:syn51156910/wiki/).
 
-Before training, the data needs to be preprocessed by **'Grayscale Normalization'** and mapped to the range of 0 to 255 by executing the following command
+Before training, the data needs to be preprocessed by **'Grayscale Normalization'** and mapped to the range of 0 to 255 by executing the following command.
 ```
 python ./preprocess/Preprocess_grayscale_norm.py --override
 ```
@@ -67,28 +67,28 @@ python ./main/train_CBSI_ide.py --quick_test --gen_save_dir ./main/trained_model
 Synthesis result saving path: ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/prediction_ddim_10/
 Prediction result saving pathh: ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/prediction/
 
-After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run
+After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
 ```
 python ./main/train_CBSI_gen.py --quick_test --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
 python ./main/train_CBSI_ide.py --quick_test --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
 ```
 
 
-# Visualize training process
+# Visualize the Training Process
 ```
 tensorboard --logdir ./main/trained_models/
 ```
 
 # Training
-First, you need to train the condictional diffusion model. To do so in prepared dataset, you can run the following command:
+First, you need to train the conditional diffusion model. To do so in a prepared dataset, you can run the following command:
 ```
-python ./main/train_CBSI_gen.py
+python ./main/train_CBSI_gen.py (--gpu 0)
 ```
-Second, you need to train the identiifcation model by runing the following command:
+Second, you need to train the identification model by running the following command:
 ```
-python ./main/train_CBSI_ide.py
+python ./main/train_CBSI_ide.py (--gpu 0)
 ```
-Note that you need to provide the path to the dataset (e.g. `dataset.root_dir='/data/BraTS/BraTS 2023'`) to successfully run the command.
+Note that you need to provide the path to the dataset (e.g., `dataset.root_dir='/data/BraTS/BraTS 2023'`) to successfully run the command.
 You can use the following command to observe the loss curve of the training process, visualize the sample image, etc.
 ```
 tensorboard --lodgir ./main/trained_models/CBSI_gen/(model save filename)
@@ -96,10 +96,23 @@ tensorboard --lodgir ./main/trained_models/CBSI_gen/(model save filename)
 [Supplement] Problem troubleshooting can be found in Error_troubleshooting.txt
 # Inference
 In the inference stage, synthesis and identification are performed together. You can do this by running the following command:
+
+After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
 ```
-python ./main/Inference.py
+python ./main/train_CBSI_gen.py --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
+python ./main/train_CBSI_ide.py --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
 ```
+
+
+# CPU support
+```
+This code runs on the CPU automatically when no GPU is available.
+Recommended only for quick testing, as CPU processing will be quite time‑consuming, especially for training or inference with diffusion models.
+```
+
 # Citation
+
 To cite our work, please use
 ```
 (To be updated)
+```
