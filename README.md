@@ -68,8 +68,8 @@ python ./main/train_CBSI_ide.py (--gpu 0) --quick_test --gen_save_dir ./main/tra
 
 
 ```
-Synthesis result saving path: ./main/trained_models/CBSI_gen/`pred_*_...class_seg_time`/prediction_ddim_10/  
-Prediction result saving pathh: ./main/trained_models/CBSI_ide/`bs*_ImageSize*_epoch*_seed*_time`/prediction/
+CBSI_gen result saving path:   ./main/trained_models/CBSI_gen/`pred_*_...class_seg_time`/prediction_ddim_10/  
+CBSI_ide result saving path:   ./main/trained_models/CBSI_ide/`bs*_ImageSize*_epoch*_seed*_time`/prediction/
 
 After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
 ```
