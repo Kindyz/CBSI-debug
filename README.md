@@ -15,7 +15,7 @@ This repository contains the code of our paper "Contrast-free identification of 
 |<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/T1.png" width="90px"><img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/T2F.png" width="90px">|<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/Synthetic_T1Gd.png" width="90px">| _Disrupted_|
 
 # System Requirements
-This code has been tested on Ubuntu in PyTorch and an NVIDIA GeForce RTX 3090 GPU. 
+This code has been tested on Ubuntu in PyTorch and an NVIDIA GeForce RTX 3090 GPU and an NVIDIA GeForce RTX 2080 Ti GPU.
 
 # Setup Environment
 In order to run our model, we suggest you create a virtual environment
@@ -50,7 +50,7 @@ To simplify the dataloading for your own dataset, we provide a default dataset t
     ├── ID_100 
     ├── ID_101  	
     
-#  ./Glioma_DATA/RAW_DATA/Val  has the same format as ./Glioma_DATA/RAW_DATA/Train          
+#  './Glioma_DATA/RAW_DATA/Val'  has the same format as './Glioma_DATA/RAW_DATA/Train'      
 ```
 If needed, you may consider downloading the glioma public dataset from [Glioma data](https://www.kaggle.com/datasets/kaiyiyi/glioma-data-tcia/) or [BraTS 2023 Challenge](https://www.synapse.org/Synapse:syn51156910/wiki/).
 
@@ -62,7 +62,11 @@ python ./preprocess/Preprocess_grayscale_norm.py --override
 ```
 python ./main/train_CBSI_gen.py (--gpu 0) --quick_test
 python ./main/train_CBSI_ide.py (--gpu 0) --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/  
+
 # The content in the {} should be changed to the actual path for saving the synthesis result.
+# example : --gen_save_dir ./main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'
+
+
 ```
 Synthesis result saving path: ./main/trained_models/CBSI_gen/`pred_*_...class_seg_time`/prediction_ddim_10/  
 Prediction result saving pathh: ./main/trained_models/CBSI_ide/`bs*_ImageSize*_epoch*_seed*_time`/prediction/
@@ -71,6 +75,8 @@ After the training is completed, the inference will be automatically carried out
 ```
 python ./main/train_CBSI_gen.py (--gpu 0) --quick_test --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
 python ./main/train_CBSI_ide.py (--gpu 0) --quick_test --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
+
+# example : --save_dir ./main/trained_models/CBSI_ide/bs1_ImageSize424_epoch10_seed42_Jul01_00-00-00/'
 ```
 
 
@@ -95,7 +101,7 @@ python ./main/train_CBSI_ide.py (--gpu 0) --gen_save_dir ./main/trained_models/C
 tensorboard --logdir ./main/trained_models/
 ```
 [Supplement] Problem troubleshooting can be found in Error_troubleshooting.txt
-# Inference
+# Inference (optional)
 After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
 ```
 python ./main/train_CBSI_gen.py (--gpu 0) --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
