@@ -1,7 +1,7 @@
 # Welcome to CBSI!
 **Contrast-free BBB Status Identification model (CBSI)** is a generative diffusion AI that can identify BBB status with high accuracy using non-contrast MR images, including T1 and T2-FLAIR MR scans.
 
-<img src="https://github.com/SMU-MedicalVision/CBSI-master/blob/main/sample_png/Framework.png" width="800px">
+<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/Framework.png" width="800px">
 
 
 This repository contains the code of our paper "Contrast-free identification of glioma blood-brain barrier status via generative diffusion AI and non-contrast MRI".
@@ -12,7 +12,7 @@ This repository contains the code of our paper "Contrast-free identification of 
 | Input               |Output 1              |Output 2                        |
 |------------------------------|-----------------|-----------------|
 |`T1 and T2-FLAIR MR scans` |`T1Gd MR scan` |`BBB status` |
-|<img src="https://github.com/SMU-MedicalVision/CBSI-master/blob/main/sample_png/T1.png" width="90px"><img src="https://github.com/SMU-MedicalVision/CBSI-master/blob/main/sample_png/T2F.png" width="90px">|<img src="https://github.com/SMU-MedicalVision/CBSI-master/blob/main/sample_png/Synthetic_T1Gd.png" width="90px">| _Disrupted_|
+|<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/T1.png" width="90px"><img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/T2F.png" width="90px">|<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/Synthetic_T1Gd.png" width="90px">| _Disrupted_|
 
 # System Requirements
 This code has been tested on Ubuntu in PyTorch and an NVIDIA GeForce RTX 3090 GPU. 
@@ -78,7 +78,7 @@ python ./main/train_CBSI_ide.py --quick_test --inference_only --gen_save_dir ./m
 ```
 tensorboard --logdir ./main/trained_models/
 ```
-<img src="https://github.com/SMU-MedicalVision/CBSI-master/blob/main/sample_png/Tensorboard.png" width="300px">
+<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/Tensorboard.png" width="300px">
 
 # Training
 First, you need to train the conditional diffusion model. To do so in a prepared dataset, you can run the following command:
