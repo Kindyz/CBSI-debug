@@ -70,8 +70,8 @@ Prediction result saving pathh: ./main/trained_models/CBSI_ide/{bs*_ImageSize*_e
 
 After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run
 ```
-python ./main/train_CBSI_gen.py  --quick_test --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
-python ./main/train_CBSI_ide.py  --quick_test --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
+python ./main/train_CBSI_gen.py --quick_test --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
+python ./main/train_CBSI_ide.py --quick_test --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
 ```
 
 
