@@ -11,3 +11,7 @@
     import warnings
     warnings.filterwarnings("ignore", category=UserWarning, message=".*To copy construct from a tensor.*")
     '''
+
+4. Command: tensorboard --logdir ./main/trained_models/  # To visualize the training process
+   UserWarning: Port 6006 is in use by another program. Either identify and stop that program, or start the server with a different port.
+   Revise: tensorboard --logdir /home/gzm/CODES/CBSI-master/main/trained_models/ --port=*new_port*
