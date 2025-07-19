@@ -52,7 +52,7 @@ To simplify the dataloading for your own dataset, we provide a default dataset t
     
 #  ./Glioma_DATA/RAW_DATA/Val  has the same format as ./Glioma_DATA/RAW_DATA/Train          
 ```
-If needed, you may consider downloading the glioma public dataset from [BraTS 2023 Challenge](https://www.synapse.org/Synapse:syn51156910/wiki/).
+If needed, you may consider downloading the glioma public dataset from [Glioma data](https://www.kaggle.com/datasets/kaiyiyi/glioma-data-tcia/) or [BraTS 2023 Challenge](https://www.synapse.org/Synapse:syn51156910/wiki/).
 
 Before training, the data needs to be preprocessed by **'Grayscale Normalization'** and mapped to the range of 0 to 255 by executing the following command.
 ```
