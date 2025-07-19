@@ -56,7 +56,6 @@ If needed, you may consider downloading the glioma public dataset from [BraTS 20
 
 Before training, the data needs to be preprocessed by **'Grayscale Normalization'** and mapped to the range of 0 to 255 by executing the following command
 ```
-# bash ./preprocess/Preprocess_grayscale_norm.sh
 python ./preprocess/Preprocess_grayscale_norm.py --override
 ```
 # Quick Test
