@@ -64,8 +64,8 @@ python ./main/train_CBSI_gen.py (--gpu 0) --quick_test
 python ./main/train_CBSI_ide.py (--gpu 0) --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/  
 # The content in the {} should be changed to the actual path for saving the synthesis result.
 ```
-Synthesis result saving path: ./main/trained_models/CBSI_gen/`{pred_*_...class_seg_time}`/prediction_ddim_10/
-Prediction result saving pathh: ./main/trained_models/CBSI_ide/`{bs*_ImageSize*_epoch*_seed*_time}`/prediction/
+Synthesis result saving path: ./main/trained_models/CBSI_gen/`pred_*_...class_seg_time`/prediction_ddim_10/  
+Prediction result saving pathh: ./main/trained_models/CBSI_ide/`bs*_ImageSize*_epoch*_seed*_time`/prediction/
 
 After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
 ```
@@ -92,7 +92,7 @@ python ./main/train_CBSI_ide.py (--gpu 0) --gen_save_dir ./main/trained_models/C
 ```
 
 ```
-tensorboard --lodgir ./main/trained_models/CBSI_gen/(model save filename)
+tensorboard --logdir ./main/trained_models/
 ```
 [Supplement] Problem troubleshooting can be found in Error_troubleshooting.txt
 # Inference
@@ -103,10 +103,9 @@ python ./main/train_CBSI_ide.py (--gpu 0) --inference_only --gen_save_dir ./main
 ```
 
 # CPU support
-```
 This code runs on the CPU automatically when no GPU is available.
 Recommended only for quick testing, as CPU processing will be quite time‑consuming, especially for training or inference with diffusion models.
-```
+
 
 # Citation
 
