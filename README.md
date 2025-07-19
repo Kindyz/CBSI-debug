@@ -57,7 +57,26 @@ Before training, the data needs to be preprocessed by **'Grayscale Normalization
 # bash ./preprocess/Preprocess_grayscale_norm.sh
 python ./preprocess/Preprocess_grayscale_norm.py --override
 ```
+# Quick Test
+```
+python ./main/train_CBSI_gen.py --quick_test
+python ./main/train_CBSI_ide.py --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/  
+# The content in the {} should be changed to the actual path for saving the synthesis result.
+```
+Synthesis result saving path: ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/prediction_ddim_10/
+Prediction result saving pathh: ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/prediction/
 
+After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run
+```
+python ./main/train_CBSI_gen.py  --quick_test --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
+python ./main/train_CBSI_ide.py  --quick_test --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
+```
+
+
+# Visualize training process
+```
+tensorboard --logdir ./main/trained_models/
+```
 
 # Training
 First, you need to train the condictional diffusion model. To do so in prepared dataset, you can run the following command:
