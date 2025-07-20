@@ -64,11 +64,11 @@ python ./preprocess/Preprocess_grayscale_norm.py --override
 
 # 3. Training
 - ## Quick Test (optional)
-**Stage I**: 
+**Stage I**: Synthesis quick test
 ```
 python ./main/train_CBSI_gen.py --gpu 0 --quick_test
 ```
-**Stage II**: 
+**Stage II**: Identification quick test 
 ```
 python ./main/train_CBSI_ide.py --gpu 0 --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/  
 ```
@@ -79,7 +79,7 @@ python ./main/train_CBSI_ide.py --gpu 0 --quick_test --gen_save_dir ./main/train
 >>CBSI_gen:   ./main/trained_models/CBSI_gen/`pred_*_...class_seg_time`/prediction_ddim_10/  
 CBSI_ide:   ./main/trained_models/CBSI_ide/`bs*_ImageSize*_epoch*_seed*_time`/prediction/  
 
-After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
+**Inference**(optional): quick test. After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
 ```
 python ./main/train_CBSI_gen.py --gpu 0 --quick_test --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
 python ./main/train_CBSI_ide.py --gpu 0 --quick_test --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
