@@ -60,8 +60,8 @@ python ./preprocess/Preprocess_grayscale_norm.py --override
 ```
 # Quick Test (optional)
 ```
-python ./main/train_CBSI_gen.py (--gpu 0) --quick_test
-python ./main/train_CBSI_ide.py (--gpu 0) --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/  
+python ./main/train_CBSI_gen.py --gpu 0 --quick_test
+python ./main/train_CBSI_ide.py --gpu 0 --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/  
 
 # The content in the {} should be changed to the actual path for saving the synthesis result.
 # example : --gen_save_dir ./main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'
@@ -73,8 +73,8 @@ CBSI_ide result saving path:   ./main/trained_models/CBSI_ide/`bs*_ImageSize*_ep
 
 After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
 ```
-python ./main/train_CBSI_gen.py (--gpu 0) --quick_test --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
-python ./main/train_CBSI_ide.py (--gpu 0) --quick_test --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
+python ./main/train_CBSI_gen.py --gpu 0 --quick_test --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
+python ./main/train_CBSI_ide.py --gpu 0 --quick_test --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
 
 # example : --save_dir ./main/trained_models/CBSI_ide/bs1_ImageSize424_epoch10_seed42_Jul01_00-00-00/'
 ```
@@ -90,11 +90,11 @@ tensorboard --logdir ./main/trained_models/
 # Training
 First, you need to train the conditional diffusion model. To do so in a prepared dataset, you can run the following command:
 ```
-python ./main/train_CBSI_gen.py (--gpu 0)
+python ./main/train_CBSI_gen.py --gpu 0
 ```
 Second, you need to train the identification model by running the following command. Note that you need to provide the path to the synthesis result (e.g., `--gen_save_dir './main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'`) to successfully run the command.
 ```
-python ./main/train_CBSI_ide.py (--gpu 0) --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
+python ./main/train_CBSI_ide.py --gpu 0 --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
 ```
 
 ```
@@ -104,8 +104,8 @@ tensorboard --logdir ./main/trained_models/
 # Inference (optional)
 After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
 ```
-python ./main/train_CBSI_gen.py (--gpu 0) --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
-python ./main/train_CBSI_ide.py (--gpu 0) --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
+python ./main/train_CBSI_gen.py --gpu 0 --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
+python ./main/train_CBSI_ide.py --gpu 0 --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
 ```
 
 # CPU support
