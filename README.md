@@ -64,8 +64,12 @@ python ./preprocess/Preprocess_grayscale_norm.py --override
 
 # 3. Training
 - ## Quick Test (optional)
+Stage I
 ```
 python ./main/train_CBSI_gen.py --gpu 0 --quick_test
+```
+Stage II
+```
 python ./main/train_CBSI_ide.py --gpu 0 --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/  
 ```
 >{} should be changed to the actual path for saving the synthesis result.  
