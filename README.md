@@ -87,10 +87,10 @@ First, you need to train the conditional diffusion model. To do so in a prepared
 python ./main/train_CBSI_gen.py --gpu 0
 ```
 Second, you need to train the identification model by running the following command. 
->Note that you need to provide the path to the synthesis result (e.g., `--gen_save_dir './main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'`) to successfully run the command.
 ```
 python ./main/train_CBSI_ide.py --gpu 0 --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
 ```
+>Note that you need to provide the path to the synthesis result (e.g., `--gen_save_dir './main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'`) to successfully run the command.
 
 ```
 tensorboard --logdir ./main/trained_models/
