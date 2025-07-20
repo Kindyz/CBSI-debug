@@ -8,13 +8,13 @@ This repository contains the code of our paper "Contrast-free identification of 
 
 
 
-# Example
+### Example
 | Input               |Output 1              |Output 2                        |
 |------------------------------|-----------------|-----------------|
 |`T1 and T2-FLAIR MR scans` |`T1Gd MR scan` |`BBB status` |
 |<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/T1.png" width="90px"><img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/T2F.png" width="90px">|<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/Synthetic_T1Gd.png" width="90px">| _Disrupted_|
 
-# System Requirements
+### System Requirements
 This code has been tested on Ubuntu in PyTorch and an NVIDIA GeForce RTX 3090 GPU and an NVIDIA GeForce RTX 2080 Ti GPU.
 
 # 1. Setup Environment
