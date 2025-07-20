@@ -205,6 +205,10 @@ if __name__ == '__main__':
     setup_seed(opt.seed)
     opt.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+    if opt.quick_test:
+        opt.max_epoch = 10
+        opt.ref_timestep = 10
+
     # -------------- Experiment naming & directory setup --------------
     if not opt.save_dir or not opt.inference_only:
         current_time = datetime.now().strftime('%b%d_%H-%M-%S')
@@ -212,16 +216,16 @@ if __name__ == '__main__':
         os.makedirs(opt.save_dir, exist_ok=True)
     os.makedirs(opt.save_dir, exist_ok=True)
 
-    if opt.quick_test:
-        opt.max_epoch = 10
-        opt.ref_timestep = 10
-
     if not opt.inference_only:
         net = main(opt)
         pred(opt, net)
     else:
         pred(opt)
-    print("CBSI_ide Training Done")
+
+    if not opt.inference_only:
+        print("CBSI_ide Training Done")
+    else:
+        print("CBSI_ide Inference Done")
     print("-------------------------------------------")
     print(f"Attention !! Results can be viewed here :\n {opt.save_dir}")
     print("-------------------------------------------")

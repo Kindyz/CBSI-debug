@@ -196,6 +196,12 @@ if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = opt.gpu
     opt.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     setup_seed(opt.seed)
+
+    if opt.quick_test:
+        opt.max_epoch = 10
+        opt.ref_timestep = 10
+        opt.val_timestep_scale = 0.1
+        opt.model_name = 'simple_unet_Improved_32_class'
     # -------------- Experiment naming & directory setup --------------
     if not opt.save_dir or not opt.inference_only:
         current_time = datetime.now().strftime('%b%d_%H-%M-%S')
@@ -205,22 +211,18 @@ if __name__ == '__main__':
                                                                               opt.activate, save_name, current_time))
     os.makedirs(join(opt.save_dir, 'train_model'), exist_ok=True)
 
-    if opt.quick_test:
-        opt.max_epoch = 10
-        opt.ref_timestep = 10
-        opt.val_timestep_scale = 0.1
-        opt.model_name = 'simple_unet_Improved_32_class'
-
-
     if not opt.inference_only:
         trainer = main(opt)
         pred(opt, trainer)
     else:
         pred(opt)
-    print("CBSI_gen Training Done")
-    print("-------------------------------------------")
-    if opt.quick_test:
-        print(f"Attention !! Please use this command to carry out the next stage of the quick test:\n python ./main/train_CBSI_ide.py --quick_test --gen_save_dir ./{opt.save_dir}/")
+    if not opt.inference_only:
+        print("CBSI_gen Training Done")
+        print("-------------------------------------------")
+        if opt.quick_test:
+            print(f"Attention !! Please use this command to carry out the next stage of the quick test:\n python ./main/train_CBSI_ide.py --quick_test --gen_save_dir ./{opt.save_dir}/")
+        else:
+            print(f"Attention !! If you want to use the model trained in this session, Please use this command to carry out the next stage of training:\n python ./main/train_CBSI_ide.py --gen_save_dir ./{opt.save_dir}/")
+        print("-------------------------------------------")
     else:
-        print(f"Attention !! If you want to use the model trained in this session, Please use this command to carry out the next stage of training:\n python ./main/train_CBSI_ide.py --gen_save_dir ./{opt.save_dir}/")
-    print("-------------------------------------------")
+        print("CBSI_gen Inference Done")
