@@ -8,13 +8,13 @@ This repository contains the code of our paper "Contrast-free identification of 
 
 
 
-### Example
+- ### Example
 | Input               |Output 1              |Output 2                        |
 |------------------------------|-----------------|-----------------|
 |`T1 and T2-FLAIR MR scans` |`T1Gd MR scan` |`BBB status` |
 |<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/T1.png" width="90px"><img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/T2F.png" width="90px">|<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/Synthetic_T1Gd.png" width="90px">| _Disrupted_|
 
-### System Requirements
+- ### System Requirements
 This code has been tested on Ubuntu in PyTorch and an NVIDIA GeForce RTX 3090 GPU and an NVIDIA GeForce RTX 2080 Ti GPU.
 
 # 1. Setup Environment
@@ -61,7 +61,7 @@ python ./preprocess/Preprocess_grayscale_norm.py --override
 
 
 # 3. Training
-## Quick Test (optional)
+- ## Quick Test (optional)
 ```
 python ./main/train_CBSI_gen.py --gpu 0 --quick_test
 python ./main/train_CBSI_ide.py --gpu 0 --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/  
@@ -80,7 +80,7 @@ python ./main/train_CBSI_ide.py --gpu 0 --quick_test --inference_only --gen_save
 # example : --save_dir ./main/trained_models/CBSI_ide/bs1_ImageSize424_epoch10_seed42_Jul01_00-00-00/'
 ```
 
-## Comprehensive Training
+- ## Comprehensive Training
 
 First, you need to train the conditional diffusion model. To do so in a prepared dataset, you can run the following command:
 ```
@@ -95,7 +95,7 @@ python ./main/train_CBSI_ide.py --gpu 0 --gen_save_dir ./main/trained_models/CBS
 tensorboard --logdir ./main/trained_models/
 ```
 
-## Visualize the Training Process (optional)
+- ## Visualize the Training Process (optional)
 You can use the following command to observe the loss curve of the training process, visualize the sample image, etc.
 ```
 tensorboard --logdir ./main/trained_models/
