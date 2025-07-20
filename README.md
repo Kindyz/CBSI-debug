@@ -64,16 +64,11 @@ python ./preprocess/Preprocess_grayscale_norm.py --override
 
 # 3. Training
 - ## Quick Test (optional)
-Stage I
-```
-python ./main/train_CBSI_gen.py --gpu 0 --quick_test
-```
-Stage II
-```
-python ./main/train_CBSI_ide.py --gpu 0 --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/  
-```
->{} should be changed to the actual path for saving the synthesis result.  
->>e.g., --gen_save_dir ./main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'
+**Stage I**: ```python ./main/train_CBSI_gen.py --gpu 0 --quick_test```  
+**Stage II**: ```python ./main/train_CBSI_ide.py --gpu 0 --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/```   
+
+>>{} should be changed to the actual path for saving the synthesis result.  
+>>>e.g., --gen_save_dir ./main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'
 
 >result saving path
 >>CBSI_gen:   ./main/trained_models/CBSI_gen/`pred_*_...class_seg_time`/prediction_ddim_10/  
@@ -84,22 +79,19 @@ After the training is completed, the inference will be automatically carried out
 python ./main/train_CBSI_gen.py --gpu 0 --quick_test --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
 python ./main/train_CBSI_ide.py --gpu 0 --quick_test --inference_only --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/ --save_dir ./main/trained_models/CBSI_ide/{bs*_ImageSize*_epoch*_seed*_time}/
 ```
-> e.g., --save_dir ./main/trained_models/CBSI_ide/bs1_ImageSize424_epoch10_seed42_Jul01_00-00-00/'
+>> e.g., --save_dir ./main/trained_models/CBSI_ide/bs1_ImageSize424_epoch10_seed42_Jul01_00-00-00/'
 - ## Comprehensive Training
 
-First, you need to train the conditional diffusion model. To do so in a prepared dataset, you can run the following command:
+**Stage I**: First, you need to train the conditional diffusion model. To do so in a prepared dataset, you can run the following command:
 ```
 python ./main/train_CBSI_gen.py --gpu 0
 ```
-Second, you need to train the identification model by running the following command. 
+**Stage II**: Second, you need to train the identification model by running the following command. 
 ```
 python ./main/train_CBSI_ide.py --gpu 0 --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
 ```
->Note that you need to provide the path to the synthesis result (e.g., `--gen_save_dir './main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'`) to successfully run the command.
+>>Note that you need to provide the path to the synthesis result (e.g., `--gen_save_dir './main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'`) to successfully run the command.
 
-```
-tensorboard --logdir ./main/trained_models/
-```
 
 - ## Visualize the Training Process (optional)
 You can use the following command to observe the loss curve of the training process, visualize the sample image, etc.
