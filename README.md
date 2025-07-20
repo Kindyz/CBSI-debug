@@ -75,8 +75,9 @@ python ./main/train_CBSI_ide.py --gpu 0 --quick_test --gen_save_dir ./main/train
 >{} should be changed to the actual path for saving the synthesis result.  
 >>e.g., --gen_save_dir ./main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'
 
->CBSI_gen result saving path:   ./main/trained_models/CBSI_gen/`pred_*_...class_seg_time`/prediction_ddim_10/  
-CBSI_ide result saving path:   ./main/trained_models/CBSI_ide/`bs*_ImageSize*_epoch*_seed*_time`/prediction/  
+>result saving path
+>>CBSI_gen:   ./main/trained_models/CBSI_gen/`pred_*_...class_seg_time`/prediction_ddim_10/  
+CBSI_ide:   ./main/trained_models/CBSI_ide/`bs*_ImageSize*_epoch*_seed*_time`/prediction/  
 
 After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
 ```
