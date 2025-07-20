@@ -17,7 +17,7 @@ This repository contains the code of our paper "Contrast-free identification of 
 # System Requirements
 This code has been tested on Ubuntu in PyTorch and an NVIDIA GeForce RTX 3090 GPU and an NVIDIA GeForce RTX 2080 Ti GPU.
 
-# Setup Environment
+# 1. Setup Environment
 In order to run our model, we suggest you create a virtual environment
 ```
 conda create -n CBSI_env python=3.8
@@ -31,7 +31,7 @@ Subsequently, download and install the required libraries by running:
 pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
 pip install -r requirements.txt
 ```
-# Prepare the Dataset
+# 2. Prepare the Dataset
 To simplify the dataloading for your own dataset, we provide a default dataset that simply requires the path to the folder with your NifTI images inside, i.e.
 ```
 ./Glioma_DATA/RAW_DATA/Train         ./Glioma_DATA/RAW_DATA/Test/                        # Path to the folder that contains the images
@@ -58,15 +58,16 @@ Before training, the data needs to be preprocessed by **'Grayscale Normalization
 ```
 python ./preprocess/Preprocess_grayscale_norm.py --override
 ```
-# Quick Test (optional)
+
+
+# 3. Training
+## Quick Test (optional)
 ```
 python ./main/train_CBSI_gen.py --gpu 0 --quick_test
 python ./main/train_CBSI_ide.py --gpu 0 --quick_test --gen_save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/  
 
 # The content in the {} should be changed to the actual path for saving the synthesis result.
 # example : --gen_save_dir ./main/trained_models/CBSI_gen/pred_x0_simple_unet_Improved_32_class_l1_condition_act_tanh_bs2_epoch10_gae1_seed42_class_seg_Jul01_00-00-00/'
-
-
 ```
 CBSI_gen result saving path:   ./main/trained_models/CBSI_gen/`pred_*_...class_seg_time`/prediction_ddim_10/  
 CBSI_ide result saving path:   ./main/trained_models/CBSI_ide/`bs*_ImageSize*_epoch*_seed*_time`/prediction/
@@ -79,15 +80,8 @@ python ./main/train_CBSI_ide.py --gpu 0 --quick_test --inference_only --gen_save
 # example : --save_dir ./main/trained_models/CBSI_ide/bs1_ImageSize424_epoch10_seed42_Jul01_00-00-00/'
 ```
 
+## Comprehensive Training
 
-# Visualize the Training Process (optional)
-You can use the following command to observe the loss curve of the training process, visualize the sample image, etc.
-```
-tensorboard --logdir ./main/trained_models/
-```
-<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/Tensorboard.png" width="300px">
-
-# Training
 First, you need to train the conditional diffusion model. To do so in a prepared dataset, you can run the following command:
 ```
 python ./main/train_CBSI_gen.py --gpu 0
@@ -100,8 +94,19 @@ python ./main/train_CBSI_ide.py --gpu 0 --gen_save_dir ./main/trained_models/CBS
 ```
 tensorboard --logdir ./main/trained_models/
 ```
+
+## Visualize the Training Process (optional)
+You can use the following command to observe the loss curve of the training process, visualize the sample image, etc.
+```
+tensorboard --logdir ./main/trained_models/
+```
+<img src="https://github.com/Kindyz/CBSI-debug/blob/main/sample_png/Tensorboard.png" width="300px">
+
+
+
+
 [Supplement] Problem troubleshooting can be found in Error_troubleshooting.txt
-# Inference (optional)
+# 4. Inference (optional)
 After the training is completed, the inference will be automatically carried out. If you want to perform the inference separately, please run:
 ```
 python ./main/train_CBSI_gen.py --gpu 0 --inference_only --save_dir ./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}/
