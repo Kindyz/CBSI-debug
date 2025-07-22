@@ -155,7 +155,7 @@ if __name__ == '__main__':
     # -------------------- Training settings
     parser.add_argument('--gpu', type=str, default='0', help='which gpu is used')
     parser.add_argument('--seed', type=int, default=42, help='random seed')
-    parser.add_argument('--max_epoch', type=int, default=100, help='all_epochs')
+    parser.add_argument('--max_epoch', type=int, default=200, help='all_epochs')
     parser.add_argument('--lr_max', type=float, default=1e-5, help='max learning rate')
     parser.add_argument('--gae', type=int, default=1, help='gradient_accumulate_every')
     parser.add_argument('--bs', type=int, default=2, help='training input batch size')
@@ -164,7 +164,7 @@ if __name__ == '__main__':
     # -------------------- Inference settings
     parser.add_argument('--val_bs', type=int, default=4, help='Val/Test batch size')
     parser.add_argument('--ref_timestep', type=int, default=100, help='<=1000, 1000 is time-consuming but of higher quality')
-    parser.add_argument('--val_timestep_scale', type=float, default=1, help='<=1000, 1000 is time-consuming but of higher quality')
+    parser.add_argument('--val_timestep_scale', type=float, default=1, help='>=100 AND <=1000, 1000 is time-consuming but of higher quality, at least 100 to ensure image quality')
     parser.add_argument('--save_dir', type=str, default='', help='./main/trained_models/CBSI_gen/{pred_*_...class_seg_time}')  # Path for saving model parameters
 
     # -------------------- Data settings
@@ -220,9 +220,9 @@ if __name__ == '__main__':
         print("CBSI_gen Training Done")
         print("-------------------------------------------")
         if opt.quick_test:
-            print(f"Attention !! Please use this command to carry out the next stage of the quick test:\n python ./main/train_CBSI_ide.py --quick_test --gen_save_dir ./{opt.save_dir}/")
+            print(f"Attention !! Please use this command to carry out the next stage of the quick test:\n python ./main/train_CBSI_ide.py --quick_test --gen_save_dir {opt.save_dir}")
         else:
-            print(f"Attention !! If you want to use the model trained in this session, Please use this command to carry out the next stage of training:\n python ./main/train_CBSI_ide.py --gen_save_dir ./{opt.save_dir}/")
+            print(f"Attention !! If you want to use the model trained in this session, Please use this command to carry out the next stage of training:\n python ./main/train_CBSI_ide.py --gen_save_dir {opt.save_dir}")
         print("-------------------------------------------")
     else:
         print("CBSI_gen Inference Done")
